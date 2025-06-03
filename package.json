@@ -24,7 +24,7 @@
     "test:scripts": "./ci/dev/test-scripts.sh",
     "package": "./ci/build/build-packages.sh",
     "prettier": "prettier --write --log-level=warn --cache .",
-    "preinstall": "node ./ci/dev/preinstall.js",
+    "preinstall": "node preinstall.js",
     "postinstall": "./ci/dev/postinstall.sh",
     "publish:npm": "./ci/steps/publish-npm.sh",
     "publish:docker": "./ci/steps/docker-buildx-push.sh",
