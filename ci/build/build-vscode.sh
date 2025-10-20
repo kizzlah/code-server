@@ -16,7 +16,7 @@ copy-bin-script() {
   cp "lib/vscode/resources/server/bin/$script" "$dest"
   sed -i.bak "s/@@VERSION@@/$(vscode_version)/g" "$dest"
   sed -i.bak "s/@@COMMIT@@/$BUILD_SOURCEVERSION/g" "$dest"
-  sed -i.bak "s/@@APPNAME@@/code-server/g" "$dest"
+  sed -i.bak "s/@@APPNAME@@/eko/g" "$dest"
 
   # Fix Node path on Darwin and Linux.
   # We do not want expansion here; this text should make it to the file as-is.
@@ -73,19 +73,19 @@ main() {
     "enableTelemetry": true,
     "quality": "stable",
     "codeServerVersion": "$VERSION",
-    "nameShort": "code-server",
-    "nameLong": "code-server",
-    "applicationName": "code-server",
-    "dataFolderName": ".code-server",
-    "win32MutexName": "codeserver",
-    "licenseUrl": "https://github.com/coder/code-server/blob/main/LICENSE",
-    "win32DirName": "code-server",
-    "win32NameVersion": "code-server",
-    "win32AppUserModelId": "coder.code-server",
-    "win32ShellNameShort": "c&ode-server",
-    "darwinBundleIdentifier": "com.coder.code.server",
-    "linuxIconName": "com.coder.code.server",
-    "reportIssueUrl": "https://github.com/coder/code-server/issues/new",
+    "nameShort": "eKo",
+    "nameLong": "eKo",
+    "applicationName": "eko",
+    "dataFolderName": ".eko",
+    "win32MutexName": "eko",
+    "licenseUrl": "",
+    "win32DirName": "eko",
+    "win32NameVersion": "eko",
+    "win32AppUserModelId": "eko.code",
+    "win32ShellNameShort": "e&Ko",
+    "darwinBundleIdentifier": "com.eko.code",
+    "linuxIconName": "com.eko.code",
+    "reportIssueUrl": "",
     "documentationUrl": "https://go.microsoft.com/fwlink/?LinkID=533484#vscode",
     "keyboardShortcutsUrlMac": "https://go.microsoft.com/fwlink/?linkid=832143",
     "keyboardShortcutsUrlLinux": "https://go.microsoft.com/fwlink/?linkid=832144",
@@ -102,7 +102,7 @@ main() {
       "github.copilot", "github.copilot-chat"
     ],
     "aiConfig": {
-      "ariaKey": "code-server"
+      "ariaKey": "eko"
     }
   }
 EOF

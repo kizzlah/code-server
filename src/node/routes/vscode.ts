@@ -172,7 +172,7 @@ router.get("/", ensureVSCodeLoaded, async (req, res, next) => {
 })
 
 router.get("/manifest.json", async (req, res) => {
-  const appName = req.args["app-name"] || "code-server"
+  const appName = req.args["app-name"] || "eKo"
   res.writeHead(200, { "Content-Type": "application/manifest+json" })
 
   res.end(
@@ -185,7 +185,7 @@ router.get("/manifest.json", async (req, res) => {
           start_url: ".",
           display: "fullscreen",
           display_override: ["window-controls-overlay"],
-          description: "Run Code on a remote server.",
+          description: "eKo - Your personal code server",
           icons: [192, 512].map((size) => ({
             src: `{{BASE}}/_static/src/browser/media/pwa-icon-${size}.png`,
             type: "image/png",

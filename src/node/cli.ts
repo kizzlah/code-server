@@ -15,6 +15,11 @@ export enum AuthType {
   None = "none",
 }
 
+export enum AuthMode {
+  TwoFactor = "2fa",
+  Passwordless = "passwordless",
+}
+
 export class Optional<T> {
   public constructor(public readonly value?: T) {}
 }
@@ -67,6 +72,7 @@ export interface UserProvidedCodeArgs {
 export interface UserProvidedArgs extends UserProvidedCodeArgs {
   config?: string
   auth?: AuthType
+  "auth-mode"?: AuthMode
   password?: string
   "hashed-password"?: string
   cert?: OptionalString
@@ -126,13 +132,15 @@ type OptionType<T> = T extends boolean
       ? typeof LogLevel
       : T extends AuthType
         ? typeof AuthType
-        : T extends number
-          ? "number"
-          : T extends string
-            ? "string"
-            : T extends string[]
-              ? "string[]"
-              : "unknown"
+        : T extends AuthMode
+          ? typeof AuthMode
+          : T extends number
+            ? "number"
+            : T extends string
+              ? "string"
+              : T extends string[]
+                ? "string[]"
+                : "unknown"
 
 export type Options<T> = {
   [P in keyof T]: Option<OptionType<T[P]>>
@@ -140,6 +148,7 @@ export type Options<T> = {
 
 export const options: Options<Required<UserProvidedArgs>> = {
   auth: { type: AuthType, description: "The type of authentication to use." },
+  "auth-mode": { type: AuthMode, description: "WebAuthn authentication mode: 2fa (password + security key) or passwordless (security key only). Default: 2fa" },
   password: {
     type: "string",
     description: "The password for password authentication (can only be passed in via $PASSWORD or the config file).",
@@ -519,6 +528,16 @@ export async function setDefaults(cliArgs: UserProvidedArgs, configArgs?: Config
     args["session-socket"] = path.join(args["user-data-dir"], "code-server-ipc.sock")
   }
   process.env.CODE_SERVER_SESSION_SOCKET = args["session-socket"]
+
+  // Set default app name to eKo
+  if (!args["app-name"]) {
+    args["app-name"] = "eKo"
+  }
+
+  // Set default auth mode to 2FA
+  if (!args["auth-mode"]) {
+    args["auth-mode"] = AuthMode.TwoFactor
+  }
 
   // --verbose takes priority over --log and --log takes priority over the
   // environment variable.
