@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  eko:
+    build:
+      context: .
+      dockerfile: Dockerfile.eko
+    container_name: eko
+    ports:
+      - "8080:8080"
+    environment:
+      - EKO_PASSWORD=${EKO_PASSWORD:-changeme}
+      - EKO_AUTH_MODE=2fa
+      - EKO_LOG=info
+    volumes:
+      - eko-data:/home/eko/.local/share/eko
+      - eko-config:/home/eko/.config/eko
+      # Optional: mount local project directory
+      - ./workspace:/home/eko/workspace
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/healthz"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+
+volumes:
+  eko-data:
+  eko-config:
