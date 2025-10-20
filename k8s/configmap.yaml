@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: eko-config
+  namespace: eko
+data:
+  EKO_AUTH_MODE: "2fa"
+  EKO_LOG: "info"
+  EKO_APP_NAME: "eKo"
