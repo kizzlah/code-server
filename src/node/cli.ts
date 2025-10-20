@@ -15,6 +15,11 @@ export enum AuthType {
   None = "none",
 }
 
+export enum AuthMode {
+  TwoFactor = "2fa",
+  Passwordless = "passwordless",
+}
+
 export class Optional<T> {
   public constructor(public readonly value?: T) {}
 }
