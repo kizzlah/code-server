@@ -520,6 +520,11 @@ export async function setDefaults(cliArgs: UserProvidedArgs, configArgs?: Config
   }
   process.env.CODE_SERVER_SESSION_SOCKET = args["session-socket"]
 
+  // Set default app name to eKo
+  if (!args["app-name"]) {
+    args["app-name"] = "eKo"
+  }
+
   // --verbose takes priority over --log and --log takes priority over the
   // environment variable.
   if (args.verbose) {
