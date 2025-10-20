@@ -534,6 +534,11 @@ export async function setDefaults(cliArgs: UserProvidedArgs, configArgs?: Config
     args["app-name"] = "eKo"
   }
 
+  // Set default auth mode to 2FA
+  if (!args["auth-mode"]) {
+    args["auth-mode"] = AuthMode.TwoFactor
+  }
+
   // --verbose takes priority over --log and --log takes priority over the
   // environment variable.
   if (args.verbose) {
