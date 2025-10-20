@@ -1,13 +1,14 @@
 {
-  "name": "code-server",
+  "name": "eko",
+  "displayName": "eKo",
   "license": "MIT",
   "version": "0.0.0",
-  "description": "Run VS Code on a remote server.",
-  "homepage": "https://github.com/coder/code-server",
+  "description": "eKo - Your personal code server",
+  "homepage": "",
   "bugs": {
-    "url": "https://github.com/coder/code-server/issues"
+    "url": ""
   },
-  "repository": "https://github.com/coder/code-server",
+  "repository": "",
   "scripts": {
     "clean": "./ci/build/clean.sh",
     "build": "./ci/build/build-code-server.sh",
@@ -93,7 +94,7 @@
     "@types/node": "20.x"
   },
   "bin": {
-    "code-server": "out/node/entry.js"
+    "eko": "out/node/entry.js"
   },
   "keywords": [
     "vscode",
