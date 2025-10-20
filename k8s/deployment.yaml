@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eko
+  namespace: eko
+  labels:
+    app: eko
+spec:
+  replicas: 1  # Single instance for personal use
+  selector:
+    matchLabels:
+      app: eko
+  template:
+    metadata:
+      labels:
+        app: eko
+    spec:
+      containers:
+      - name: eko
+        image: eko:latest  # Use your registry
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+          name: http
+        env:
+        - name: EKO_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: eko-secret
+              key: password
+        - name: EKO_AUTH_MODE
+          valueFrom:
+            configMapKeyRef:
+              name: eko-config
+              key: EKO_AUTH_MODE
+        - name: EKO_LOG
+          valueFrom:
+            configMapKeyRef:
+              name: eko-config
+              key: EKO_LOG
+        volumeMounts:
+        - name: data
+          mountPath: /home/eko/.local/share/eko
+        - name: config
+          mountPath: /home/eko/.config/eko
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "2000m"
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: eko-data
+      - name: config
+        emptyDir: {}
