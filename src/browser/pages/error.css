@@ -10,8 +10,8 @@
 }
 
 .error-display > .body {
-  color: #444;
-  color: light-dark(#444, #ccc);
+  color: #ffffff;
+  color: light-dark(#ffffff, #ffffff);
   font-size: 1.2rem;
 }
 
@@ -20,7 +20,7 @@
 }
 
 .error-display > .links > .link {
-  color: rgb(87, 114, 245);
+  color: #A8C7FA;
   text-decoration: none;
 }
 
@@ -29,5 +29,5 @@
 }
 
 .error-display .success {
-  color: green;
+  color: #A8C7FA;
 }
