@@ -72,6 +72,7 @@ export interface UserProvidedCodeArgs {
 export interface UserProvidedArgs extends UserProvidedCodeArgs {
   config?: string
   auth?: AuthType
+  "auth-mode"?: AuthMode
   password?: string
   "hashed-password"?: string
   cert?: OptionalString
